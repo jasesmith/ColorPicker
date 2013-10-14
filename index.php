@@ -178,6 +178,7 @@ $color_picker_input = $color_picker_input ? $color_picker_input : 'color';
 			}
 			
 			function getContrast50(hexcolor){
+				hexcolor = hexcolor.replace('#','');
 				return (parseInt(hexcolor, 16) > 0xffffff/2) ? 'black':'white';
 			}
 /*
