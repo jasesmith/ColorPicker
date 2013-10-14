@@ -69,7 +69,8 @@ $color_picker_input = $color_picker_input ? $color_picker_input : 'color';
 <!DOCTYPE html>
 <html>
 	<head>
-	<link href="css/picker.css" rel="stylesheet" />
+		<title>Color Picker</title>
+		<link href="css/picker.css" rel="stylesheet" />
 	</head>
 	<body>
 		<div class="color-picker" data-current-color="<?php echo $current_color; ?>" data-current-color-text="<?php echo $current_text_color; ?>" data-current-color-name="<?php echo $current_color_name; ?>">
