@@ -29,6 +29,7 @@ $colors = array(
 	
 	//'Snow' 					=> array('lum' => 'light', 'color' => '#F3F6F9', 'text' => '#000000'),
 	);
+/*
 if(strlen($preset_color) < 1)// pick random color if no incoming color
 {
 	foreach($colors as $color)
@@ -40,28 +41,30 @@ if(strlen($preset_color) < 1)// pick random color if no incoming color
 		break;
 	}
 }
-
-if(strlen($preset_color) < 1)//If out of colors use gizmo blue
+*/
+if(strlen($preset_color) < 1)//If out of colors use surf blue
 {
-	$preset_color = $colors['Gizmo']['color'];
+	$preset_color_name = 'Surf';
+	$preset_color = $colors[$preset_color_name]['color'];
 }
 
 // handle current color
-foreach($colors as $k => $v)
+foreach($colors as $name => $props)
 {
-	if(in_array($preset_color, $v))
+	if(in_array($preset_color, $props))
 	{
-		$current_color = $v['color'];
-		$current_text_color = $v['text'];
+		$current_color = $props['color'];
+		$current_color_text = $props['text'];
+		$current_color_name = $name;
 		break;
 	}
 }
-var_dump($colors);
+//echo '<pre>';var_dump($current_color, $current_color_text,$current_color_name);echo "</pre>";
 unset($k,$v);
 
 $current_color = strlen($current_color) > 0 ? $current_color : $preset_color;
 $color_picker_label = $color_picker_label ? $color_picker_label : 'Color';
-$color_picker_input = $color_picker_input ? $color_picker_input : 'listcolor';
+$color_picker_input = $color_picker_input ? $color_picker_input : 'color';
 ?>
 <!DOCTYPE html>
 <html>
@@ -69,28 +72,37 @@ $color_picker_input = $color_picker_input ? $color_picker_input : 'listcolor';
 	<link href="css/picker.css" rel="stylesheet" />
 	</head>
 	<body>
-		<div class="color-picker" data-current-color="<?php echo $current_color; ?>" data-current-color-text="<?php echo $current_text_color; ?>" data-current-color="<?php echo $current_color; ?>">
+		<div class="color-picker" data-current-color="<?php echo $current_color; ?>" data-current-color-text="<?php echo $current_text_color; ?>" data-current-color-name="<?php echo $current_color_name; ?>">
 			<?php echo $color_picker_label; ?>
-			<div class="color-cue" style="background-color:<?php echo $current_color; ?>;"></div>
-			<span class="color-cue-name"><?php echo $current_color; ?></span>
-			<input type="hidden" name="<?php echo $color_picker_input ?>" id="<?php echo $color_picker_input ?>" value="<?php echo $preset_color; ?>" />
+			<div class="color-box color-cue"></div>
+			<span class="color-cue-name"></span>
+			<input type="hidden" class="color-picker-input picker-preview" name="<?php echo $color_picker_input ?>" id="<?php echo $color_picker_input ?>" value="<?php echo $current_color; ?>" />
 			
 			<div class="color-chips">
 				<ul>
 				<?php
 				foreach($colors as $name => $props)
 				{
-					$active = $preset_color == $props['color'] ? ' active' : '';
+					$checked = $preset_color == $props['color'] ? ' checked="checked"' : '';
+					$clean_hex = str_replace('#','', $props['color']);
 					?>
-					<li class="<?php echo $active; ?>"><div class="color-box" data-colorname="<?php echo $name; ?>" data-color="<?php echo $props['color']; ?>" data-colortext="<?php echo $props['text']; ?>" title="<?php echo $name; ?>" style="background-color:<?php echo $props['color']; ?>;"></div></li>
+					<li>
+						<input type="radio" name="c" id="color-<?php echo $clean_hex; ?>" data-colorname="<?php echo $name; ?>" data-colortext="<?php echo $props['text']; ?>" value="<?php echo $props['color']; ?>"<?php echo $checked ?> />
+						<label for="color-<?php echo $clean_hex; ?>" class="color-box" title="<?php echo $name; ?>" style="background-color:<?php echo $props['color']; ?>;">
+							<span><?php echo $name ?></span>
+						</label>
+					</li>
 					<?php
 				}
 				?>
 				</ul>
 				<ul class="divider">
-					<li class="previewer"><div class="color-box" data-colorname="<?php echo $current_color; ?>" data-color="<?php echo $preset_color; ?>" data-colortext="<?php echo $current_text_color; ?>" title="current choice" style="background-color:<?php echo $preset_color; ?>;"></div></li>
-					<li class="previewer"><input type="text" class="picker-preview" value="<?php echo $preset_color; ?>" style="background-color:<?php echo $preset_color; ?>;color:#FFFFFF;" /></li>
-					<li class="previewer"><div class="color-cue-name">lala<?php echo $current_color; ?></div></li>
+					<li class="previewer">
+						<input id="custom" type="text" class="color-cue picker-preview" value="<?php echo $current_color; ?>" />
+					</li>
+					<li class="previewer">
+						<div class="color-cue-name picker-preview-name"><?php echo $current_color_name; ?></div>
+					</li>
 				</ul>
 				<?php
 				
@@ -118,110 +130,82 @@ $color_picker_input = $color_picker_input ? $color_picker_input : 'listcolor';
 				?>
 			</div>
 		</div>
-		<script src="/core/j/jquery-1.10.2.min.js"></script>
+		<script src="/core/j/jquery-2.0.3.min.js"></script>
 		<script type="text/javascript">
 			$(function(){
-				var colorPicker = $('div.color-picker');
-				var colors = colorPicker.find('.color-box');
-				/*
-				var customColors = $('div.color-picker .custom').find('.color-box');
-				var colorsUsed = $('div.color-picker').find('.color-in-use');
-				*/
-				var currColor = colorPicker.data('current-color');
-				var currTextColor = colorPicker.data('current-color-text');
-				var currColorName = '<?php echo $current_color; ?>';
-				var currColorBorder = SGAPI.util.colorShift(currColor,'#000000',.15);
-				var previewColor = $('div.color-picker').find('.picker-preview');
+				var $colorPicker = $('div.color-picker');
+				var $previewColor = $colorPicker.find('.picker-preview');
 				
-				$('#color-cue').css({backgroundColor:currColor,borderColor:currColorBorder});
+				var colors = $colorPicker.find('[type="radio"]');
 				
-				colors.bind('click', function(){
-					var color = $(this).data('color');
-					var textColor = $(this).data('textcolor');
+				var currColor = $colorPicker.data('current-color');
+				var currColorText = getContrastYIQ(currColor);
+				var currColorName = $colorPicker.data('current-color-name');
+//				var currColorBorder = shiftHex(currColor,'#000000',.15);
+				$('.color-cue').css({backgroundColor:currColor,color:currColorText});
+				$('.color-cue-name').text(currColorName);
+				
+				colors.on('click', function(){
+					var color = $(this).val();
+					var colorText = getContrastYIQ(color);// $(this).data('colortext');
 					var colorName = $(this).data('colorname');
-					var borderColor = SGAPI.util.colorShift(color,'#000000',.15);
+//					var borderColor = shiftHex(color,'#000000',.15);
 					
-					currColor = color;
-					currTextColor = textColor;
-					currColorName = colorName;
-					colors.parent().removeClass('active');
-					
-					$(this).parent().addClass('active');
-					$('#<?php echo $color_picker_input ?>').val(color);
-					$('#color-cue-name').text(colorName);
-					$('#color-cue, .sync-swatch').css({backgroundColor:color,borderColor:borderColor});
-				});
-				/*
-				customColors.bind('click', function(){
-					var customId = $(this).attr('custom');
-					previewColor.attr('placeholder','enter hex');
-					previewColor.attr('custom',customId);
-				});
-				*/
-				colors.bind('mouseenter', function(){
-					var color = $(this).data('color');
-					var textColor = $(this).data('textcolor');
-					var colorName = $(this).data('colorname');
-					$('div.color-picker').find('.color-cue-name').text(colorName);
-					previewColor.val(color).css({backgroundColor:color,color:textColor});
-				});
-				colors.bind('mouseleave', function(){
-					var color = currColor;
-					var textColor = currTextColor;
-					var colorName = currColorName;
-					$('div.color-picker').find('.color-cue-name').text(colorName);
-					previewColor.val(color).css({backgroundColor:color,color:textColor});
+					$('.picker-preview').val(color);
+					$('.color-cue-name').text(colorName);
+					$('.color-cue').css({backgroundColor:color,color:colorText});
 				});
 				
-				colorsUsed.bind('mouseenter', function(){
-					var color = $(this).data('color');
-					var targetColor = $('div.color-picker').find('[data-color="' + color + '"]');
-					console.log(color, targetColor);
-					targetColor.parent('li').addClass('highlight');
-				});
-				colorsUsed.bind('mouseleave', function(){
-					var color = $(this).data('color');
-					var targetColor = $('div.color-picker').find('[data-color="' + color + '"]');
-					console.log(color, targetColor);
-					targetColor.parent('li').removeClass('highlight');
-				});
-				
-				previewColor.bind('keyup', function(){
+				$previewColor.on('keyup', function(){
 					var newVal = $(this).val();
-					var textColor = '#FFFFFF';
-					/*
-					if($(this).attr('custom').length) {
-						var customId = $(this).attr('custom');
-						var newColorName = newVal;
-						var newColor = newVal;
-						var newTextColor = textColor;
-						var newColorBox = $('.color-box[custom="'+customId+'"]');
-						
-						newColorBox.css({backgroundColor:newVal});
-						newColorBox.data('color',newColor);
-						newColorBox.data('textcolor',newTextColor);
-						if(event.which == 13) {
-							newColorBox.removeClass('custom').addClass('custom-defined').removeAttr('custom');
-						}
-					}
-					*/
-					$('#<?php echo $color_picker_input ?>').val(newVal);
-					$('#color-cue-name').text(newVal);
-					$('#color-cue, .sync-swatch').css({backgroundColor:newVal});
-					previewColor.css({backgroundColor:newVal,color:textColor});
-				});
-				
-				$('input.picker-preview').draggable();
-				$('.custom').find('.color-box').droppable({
-					accept: 'input.picker-preview',
-					drop: function( event, ui ) {
-						$( this )
-						.addClass( "ui-state-highlight" )
-						.find( "p" )
-						.html( "Dropped!");
-					}
+					var colorText = getContrastYIQ(newVal);
+					$('.color-picker-input').val(newVal);
+					$('.color-cue-name').text(newVal);
+					$('.picker-preview-name').text('custom');
+					$('.color-cue').css({backgroundColor:newVal});
+					$previewColor.css({backgroundColor:newVal,color:colorText});
 				});
 			});
+			
+			function getContrastYIQ(hexcolor){
+				hexcolor = hexcolor.replace('#','');
+				var r = parseInt(hexcolor.substr(0,2),16);
+				var g = parseInt(hexcolor.substr(2,2),16);
+				var b = parseInt(hexcolor.substr(4,2),16);
+				var yiq = ((r*299)+(g*587)+(b*114))/1000;
+				return (yiq >= 128) ? 'black' : 'white';
+			}
+			
+			function getContrast50(hexcolor){
+				return (parseInt(hexcolor, 16) > 0xffffff/2) ? 'black':'white';
+			}
+/*
+			function shiftHex(hexfrom,hexto,i){
+				i = i || .5;
+				
+				var r1 = parseInt(hexfrom.substr(1,2),16);
+				var g1 = parseInt(hexfrom.substr(3,2),16);
+				var b1 = parseInt(hexfrom.substr(5,2),16);
+				
+				var r2 = parseInt(hexto.substr(1,2),16);
+				var g2 = parseInt(hexto.substr(3,2),16);
+				var b2 = parseInt(hexto.substr(5,2),16);
+				
+				var r = parseInt( r1 - ((r1 - r2) * i));
+				var g = parseInt( g1 - ((g1 - g2) * i));
+				var b = parseInt( b1 - ((b1 - b2) * i));
+				
+				r = r.toString(16);
+				g = g.toString(16);
+				b = b.toString(16);
+				
+				r = r.length < 2 ? "0" + r : r;
+				g = g.length < 2 ? "0" + g : g;
+				b = b.length < 2 ? "0" + b : b;
+				
+				return "#" + r + g + b;
+			}
+*/
 		</script>
 	</body>
 </html>

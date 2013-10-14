@@ -20,6 +20,7 @@
 }
 .color-picker .color-cue {
   margin-top: -0.25em;
+  border-radius: .2em;
   box-shadow: 0 0 0 1px rgba(51, 54, 57, 0.65);
 }
 .color-picker ul {
@@ -74,6 +75,7 @@
   background: #333639;
   border: 2px solid #dadcde;
   border-radius: .5em;
+  z-index: 2;
 }
 .color-picker:hover .color-chips {
   display: block;
@@ -81,7 +83,7 @@
 .color-picker .divider {
   border-top: 1px solid #000000;
   border-bottom: 1px solid #575c61;
-  padding: 3px;
+  padding: 4px;
   background: #1b1d1e;
   border-radius: 0 0 .3em .3em;
 }
@@ -100,8 +102,8 @@
   width: 7em;
   border: 0;
   text-shadow: 0 0 1px rgba(0, 0, 0, 0.65);
-  border-radius: .3em;
-  font-weight: 300;
+  box-shadow: none;
+  border-radius: 0;
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
   -ms-transition: all 0.3s ease 0s;
