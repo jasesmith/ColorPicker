@@ -3,6 +3,7 @@
 
 .color-picker {
 	float:left;
+	position:relative;
 	font-size:13px;
 	font-family:Helvetica, Arial, sans-serif;
 	
@@ -80,14 +81,18 @@
 	}
 	
 	.color-chips {
-		float:left;
 		display:none;
+		opacity:0;
 		position:relative;
+		top:100%;
+		left:0;
 		background:@base;
 		border:2px solid lighten(@base, 65%);
 		box-shadow:0 0 0 1px fadeout(#000, 65%);
 		border-radius:.5em;
 		z-index:2;
+		.transition(opacity, .25s, .3s);
+		
 		.color-box:after {
 			content:attr(data-title);
 			position:absolute;
@@ -107,8 +112,31 @@
 		}
 	}
 	
-	&:hover .color-chips {
+	.toggle-picker {
+		position:absolute;
+		visibility:hidden;
+		top:0;
+		left:0;
+	}
+	.toggle-picker:checked ~ .color-chips {
 		display:block;
+		opacity:1;
+	}
+	
+	.close-picker {
+		position:absolute;
+		top:-1em;
+		right:-1em;
+		background:fadeout(#000,15%);
+		box-shadow:0 0 0 2px #FFF, 0 0 1em 0 fadeout(#000,50%);
+		border-radius:1.5em;
+		color:#FFF;
+		line-height:1.5em;
+		font-size:12px;
+		z-index:5;
+		width:1.5em;
+		height:1.5em;
+		text-align:center;
 	}
 	
 	.divider {
@@ -121,7 +149,7 @@
 		
 		.color-cue-name {
 			padding:0 .5em 0 0;
-			line-height:1.85;
+			line-height:2;
 			color:fadeout(#FFF, 35%);
 		}
 	}
@@ -139,7 +167,6 @@
 		border:0;
 		text-shadow:0 0 1px rgba(0,0,0,.65);
 		box-shadow:none;
-		border-radius:0;
 		outline:none;
 		.transition(all, .3s);
 		

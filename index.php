@@ -3,31 +3,53 @@ $colors_in_use = array();
 $colors = array(
 	//'Soot' 					=> array('lum' => 'dark', 'color' => '#010203', 'text' => '#FFFFFF'),
 	
-	'Cherry' 				=> array('lum' => 'dark', 'color' => '#CC0235', 'text' => '#FFFFFF'),
-	'Tangerine' 			=> array('lum' => 'dark', 'color' => '#FF6600', 'text' => '#FFFFFF'),
-	'Lemon' 				=> array('lum' => 'dark', 'color' => '#FBCD29', 'text' => '#000000'),
-	'Avocado' 				=> array('lum' => 'dark', 'color' => '#6F973B', 'text' => '#FFFFFF'),
-	'Surf' 					=> array('lum' => 'dark', 'color' => '#5B80BF', 'text' => '#FFFFFF'),
-	'Plum' 					=> array('lum' => 'dark', 'color' => '#613897', 'text' => '#FFFFFF'),
-	'Charcoal' 				=> array('lum' => 'medium', 'color' => '#57575A', 'text' => '#FFFFFF'),
+	'Passion' 				=> array('lum' => 'dark', 'color' => '#5E1527', 'text' => '#FFFFFF'),
+	'Clay' 					=> array('lum' => 'dark', 'color' => '#7E331A', 'text' => '#FFFFFF'),
+	'Belly' 				=> array('lum' => 'dark', 'color' => '#886911', 'text' => '#FFFFFF'),
+	'Forest' 				=> array('lum' => 'dark', 'color' => '#273E1B', 'text' => '#FFFFFF'),
+	'Rift' 					=> array('lum' => 'dark', 'color' => '#263553', 'text' => '#FFFFFF'),
+	'Deep' 					=> array('lum' => 'dark', 'color' => '#2F2A45', 'text' => '#FFFFFF'),
+	'Soot' 					=> array('lum' => 'dark', 'color' => '#222226', 'text' => '#FFFFFF'),
 	
-	'Bubble Gum' 			=> array('lum' => 'medium', 'color' => '#F36E98', 'text' => '#000000'),
-	'Mango' 				=> array('lum' => 'medium', 'color' => '#F79C3B', 'text' => '#000000'),
-	'Banana' 				=> array('lum' => 'medium', 'color' => '#FFFE70', 'text' => '#000000'),
-	'Kiwi' 					=> array('lum' => 'medium', 'color' => '#A1CA6D', 'text' => '#000000'),
-	'Turquoise' 			=> array('lum' => 'medium', 'color' => '#76BBDD', 'text' => '#000000'),
-	'A&ccedil;ai Berry' 	=> array('lum' => 'medium', 'color' => '#656798', 'text' => '#FFFFFF'),
+	'Cranberry' 			=> array('lum' => 'dark', 'color' => '#99082C', 'text' => '#FFFFFF'),
+	'Valencia' 				=> array('lum' => 'dark', 'color' => '#D94312', 'text' => '#FFFFFF'),
+	'Custard' 				=> array('lum' => 'dark', 'color' => '#EDB000', 'text' => '#FFFFFF'),
+	'Moss' 					=> array('lum' => 'dark', 'color' => '#2C5913', 'text' => '#FFFFFF'),
+	'Oceana' 				=> array('lum' => 'dark', 'color' => '#2A4884', 'text' => '#FFFFFF'),
+	'Grape Juice' 			=> array('lum' => 'dark', 'color' => '#3B3168', 'text' => '#FFFFFF'),
+	'Charcoal' 				=> array('lum' => 'dark', 'color' => '#323237', 'text' => '#FFFFFF'),
+	
+	'Berry Yogurt' 			=> array('lum' => 'dark', 'color' => '#B23959', 'text' => '#FFFFFF'),
+	'Tangerine' 			=> array('lum' => 'dark', 'color' => '#E36A38', 'text' => '#FFFFFF'),
+	'Lemon' 				=> array('lum' => 'dark', 'color' => '#F2C433', 'text' => '#000000'),
+	'Avocado' 				=> array('lum' => 'dark', 'color' => '#588341', 'text' => '#FFFFFF'),
+	'Surf' 					=> array('lum' => 'dark', 'color' => '#5376A3', 'text' => '#FFFFFF'),
+	'Plum' 					=> array('lum' => 'dark', 'color' => '#685D8E', 'text' => '#FFFFFF'),
+	'Slate' 				=> array('lum' => 'medium', 'color' => '#57575A', 'text' => '#FFFFFF'),
+	
+	'Bubble Gum' 			=> array('lum' => 'medium', 'color' => '#CB6B86', 'text' => '#000000'),
+	'Mango' 				=> array('lum' => 'medium', 'color' => '#EC905E', 'text' => '#000000'),
+	'Banana' 				=> array('lum' => 'medium', 'color' => '#F6D866', 'text' => '#000000'),
+	'Kiwi' 					=> array('lum' => 'medium', 'color' => '#85AC70', 'text' => '#000000'),
+	'Rain' 					=> array('lum' => 'medium', 'color' => '#7BA4C2', 'text' => '#000000'),
+	'A&ccedil;ai Berry' 	=> array('lum' => 'medium', 'color' => '#9588B4', 'text' => '#FFFFFF'),
 	'Ash' 					=> array('lum' => 'light', 'color' => '#969699', 'text' => '#FFFFFF'),
 	
-	'Cotton Candy' 			=> array('lum' => 'light', 'color' => '#FACDCC', 'text' => '#000000'),
-	'Squash' 				=> array('lum' => 'light', 'color' => '#FBCD6D', 'text' => '#000000'),
-	'Chiffon' 				=> array('lum' => 'light', 'color' => '#FFFE9E', 'text' => '#000000'),
-	'Spring' 				=> array('lum' => 'light', 'color' => '#D4FD9E', 'text' => '#000000'),
-	'Dusk' 					=> array('lum' => 'light', 'color' => '#B0C8E5', 'text' => '#000000'),
-	'Lavender' 				=> array('lum' => 'light', 'color' => '#989ACA', 'text' => '#000000'),
+	'Pink' 					=> array('lum' => 'light', 'color' => '#E39CB2', 'text' => '#000000'),
+	'Squash' 				=> array('lum' => 'light', 'color' => '#F6B784', 'text' => '#000000'),
+	'Chiffon' 				=> array('lum' => 'light', 'color' => '#FBEB99', 'text' => '#000000'),
+	'Spring' 				=> array('lum' => 'light', 'color' => '#B1D69E', 'text' => '#000000'),
+	'Sky' 					=> array('lum' => 'light', 'color' => '#A4D1E0', 'text' => '#000000'),
+	'Lavender' 				=> array('lum' => 'light', 'color' => '#C2B4D9', 'text' => '#000000'),
 	'Smoke' 				=> array('lum' => 'light', 'color' => '#C6C6C9', 'text' => '#000000'),
 	
-	//'Snow' 					=> array('lum' => 'light', 'color' => '#F3F6F9', 'text' => '#000000'),
+	'Cotton Candy' 			=> array('lum' => 'light', 'color' => '#FCCDDF', 'text' => '#000000'),
+	'Papyrus' 				=> array('lum' => 'light', 'color' => '#FFDDAA', 'text' => '#000000'),
+	'Sunshine' 				=> array('lum' => 'light', 'color' => '#FFFFCC', 'text' => '#000000'),
+	'Mint' 					=> array('lum' => 'light', 'color' => '#DDFFCC', 'text' => '#000000'),
+	'Wash' 					=> array('lum' => 'light', 'color' => '#CCFFFF', 'text' => '#000000'),
+	'Dusk' 					=> array('lum' => 'light', 'color' => '#EFDFFF', 'text' => '#000000'),
+	'Snow' 					=> array('lum' => 'light', 'color' => '#F3F6F9', 'text' => '#000000'),
 	);
 /*
 if(strlen($preset_color) < 1)// pick random color if no incoming color
@@ -75,7 +97,8 @@ $color_picker_input = $color_picker_input ? $color_picker_input : 'color';
 	<body>
 		<div class="color-picker" data-current-color="<?php echo $current_color; ?>" data-current-color-text="<?php echo $current_text_color; ?>" data-current-color-name="<?php echo $current_color_name; ?>">
 			<?php echo $color_picker_label; ?>
-			<div class="color-box color-cue"></div>
+			<input type="checkbox" id="toggle-picker" class="toggle-picker" />
+			<label for="toggle-picker" class="color-box color-cue"></label>
 			<span class="color-cue-name"></span>
 			<input type="hidden" class="color-picker-input picker-preview" name="<?php echo $color_picker_input ?>" id="<?php echo $color_picker_input ?>" value="<?php echo $current_color; ?>" />
 			
@@ -129,6 +152,7 @@ $color_picker_input = $color_picker_input ? $color_picker_input : 'color';
 				}
 				*/
 				?>
+				<label for="toggle-picker" class="close-picker">&times;</label>
 			</div>
 		</div>
 		<script src="/core/j/jquery-2.0.3.min.js"></script>
