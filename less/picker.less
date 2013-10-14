@@ -13,7 +13,7 @@
 		vertical-align:middle;
 		width:2em;
 		height:2em;
-		box-shadow:0 0 0 1px fadeout(@base, 35%);
+		box-shadow:0 0 0 1px fadeout(#FFF, 85%) inset, 0 0 0 1px #000;
 		z-index:1;
 		.transition(all, .25s);
 	}
@@ -21,7 +21,7 @@
 	.color-cue {
 		margin-top:-.25em;
 		border-radius:.2em;
-		box-shadow:0 0 0 1px fadeout(@base, 35%);
+		box-shadow:0 0 0 1px fadeout(#000, 35%);
 	}
 	
 	ul {
@@ -47,7 +47,7 @@
 			margin:-.25em;
 			z-index:3;
 			border-radius:.25em;
-			box-shadow:0 0 0 1px fadeout(@base, 65%) inset;
+			box-shadow:0 0 0 1px fadeout(#FFF, 85%) inset, 0 0 0 1px #000;
 		}
 		
 		&.previewer {
@@ -71,7 +71,7 @@
 			
 			&:checked + .color-box {
 				z-index:2;
-				box-shadow:0 0 0 1px fadeout(@base, 65%) inset, 0 0 0 .25em #FFF, 0 0 .75em 0 fadeout(#000,.65);
+				box-shadow:0 0 0 1px fadeout(#000, 65%) inset, 0 0 0 .25em #FFF, 0 0 .75em 0 fadeout(#000,35%);
 			}
 		}
 		span {
@@ -85,8 +85,26 @@
 		position:relative;
 		background:@base;
 		border:2px solid lighten(@base, 65%);
+		box-shadow:0 0 0 1px fadeout(#000, 65%);
 		border-radius:.5em;
 		z-index:2;
+		.color-box:after {
+			content:attr(data-title);
+			position:absolute;
+			top:65%;
+			left:65%;
+			font-size:.85em;
+			white-space:nowrap;
+			line-height:1;
+			border-radius:.3em;
+			display:none;
+			background:fadeout(#000,35%);
+			padding:.2em .5em;
+			color:#FFF;
+		}
+		.color-box:hover:after {
+			display:block;
+		}
 	}
 	
 	&:hover .color-chips {
@@ -96,9 +114,10 @@
 	.divider {
 		border-top:1px solid darken(@base, 25%);
 		border-bottom:1px solid lighten(@base, 15%);
-		padding:4px;
+		padding:.5em;
 		background:darken(@base, 10%);
 		border-radius:0 0 .3em .3em;
+		font-weight:300;
 		
 		.color-cue-name {
 			padding:0 .5em 0 0;
@@ -121,6 +140,12 @@
 		text-shadow:0 0 1px rgba(0,0,0,.65);
 		box-shadow:none;
 		border-radius:0;
+		outline:none;
 		.transition(all, .3s);
+		
+		&:focus,
+		&:active {
+			box-shadow:0 0 0 1px #69C, 0 0 .5em 0 #69C;
+		}
 	}
 }

@@ -3,29 +3,29 @@ $colors_in_use = array();
 $colors = array(
 	//'Soot' 					=> array('lum' => 'dark', 'color' => '#010203', 'text' => '#FFFFFF'),
 	
-	'Charcoal' 				=> array('lum' => 'medium', 'color' => '#57575A', 'text' => '#FFFFFF'),
 	'Cherry' 				=> array('lum' => 'dark', 'color' => '#CC0235', 'text' => '#FFFFFF'),
 	'Tangerine' 			=> array('lum' => 'dark', 'color' => '#FF6600', 'text' => '#FFFFFF'),
 	'Lemon' 				=> array('lum' => 'dark', 'color' => '#FBCD29', 'text' => '#000000'),
 	'Avocado' 				=> array('lum' => 'dark', 'color' => '#6F973B', 'text' => '#FFFFFF'),
 	'Surf' 					=> array('lum' => 'dark', 'color' => '#5B80BF', 'text' => '#FFFFFF'),
 	'Plum' 					=> array('lum' => 'dark', 'color' => '#613897', 'text' => '#FFFFFF'),
+	'Charcoal' 				=> array('lum' => 'medium', 'color' => '#57575A', 'text' => '#FFFFFF'),
 	
-	'Ash' 					=> array('lum' => 'light', 'color' => '#969699', 'text' => '#FFFFFF'),
 	'Bubble Gum' 			=> array('lum' => 'medium', 'color' => '#F36E98', 'text' => '#000000'),
 	'Mango' 				=> array('lum' => 'medium', 'color' => '#F79C3B', 'text' => '#000000'),
 	'Banana' 				=> array('lum' => 'medium', 'color' => '#FFFE70', 'text' => '#000000'),
 	'Kiwi' 					=> array('lum' => 'medium', 'color' => '#A1CA6D', 'text' => '#000000'),
 	'Turquoise' 			=> array('lum' => 'medium', 'color' => '#76BBDD', 'text' => '#000000'),
 	'A&ccedil;ai Berry' 	=> array('lum' => 'medium', 'color' => '#656798', 'text' => '#FFFFFF'),
+	'Ash' 					=> array('lum' => 'light', 'color' => '#969699', 'text' => '#FFFFFF'),
 	
-	'Smoke' 				=> array('lum' => 'light', 'color' => '#C6C6C9', 'text' => '#000000'),
 	'Cotton Candy' 			=> array('lum' => 'light', 'color' => '#FACDCC', 'text' => '#000000'),
 	'Squash' 				=> array('lum' => 'light', 'color' => '#FBCD6D', 'text' => '#000000'),
 	'Chiffon' 				=> array('lum' => 'light', 'color' => '#FFFE9E', 'text' => '#000000'),
 	'Spring' 				=> array('lum' => 'light', 'color' => '#D4FD9E', 'text' => '#000000'),
 	'Dusk' 					=> array('lum' => 'light', 'color' => '#B0C8E5', 'text' => '#000000'),
 	'Lavender' 				=> array('lum' => 'light', 'color' => '#989ACA', 'text' => '#000000'),
+	'Smoke' 				=> array('lum' => 'light', 'color' => '#C6C6C9', 'text' => '#000000'),
 	
 	//'Snow' 					=> array('lum' => 'light', 'color' => '#F3F6F9', 'text' => '#000000'),
 	);
@@ -89,7 +89,7 @@ $color_picker_input = $color_picker_input ? $color_picker_input : 'color';
 					?>
 					<li>
 						<input type="radio" name="c" id="color-<?php echo $clean_hex; ?>" data-colorname="<?php echo $name; ?>" data-colortext="<?php echo $props['text']; ?>" value="<?php echo $props['color']; ?>"<?php echo $checked ?> />
-						<label for="color-<?php echo $clean_hex; ?>" class="color-box" title="<?php echo $name; ?>" style="background-color:<?php echo $props['color']; ?>;">
+						<label for="color-<?php echo $clean_hex; ?>" class="color-box" data-title="<?php echo $name; ?> (<?php echo $props['color']; ?>)" style="background-color:<?php echo $props['color']; ?>;">
 							<span><?php echo $name ?></span>
 						</label>
 					</li>
@@ -164,7 +164,7 @@ $color_picker_input = $color_picker_input ? $color_picker_input : 'color';
 					$('.color-cue-name').text(newVal);
 					$('.picker-preview-name').text('custom');
 					$('.color-cue').css({backgroundColor:newVal});
-					$previewColor.css({backgroundColor:newVal,color:colorText});
+					$(this).css({backgroundColor:newVal,color:colorText});
 				});
 			});
 			

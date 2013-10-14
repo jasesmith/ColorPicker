@@ -10,7 +10,7 @@
   vertical-align: middle;
   width: 2em;
   height: 2em;
-  box-shadow: 0 0 0 1px rgba(51, 54, 57, 0.65);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15000000000000002) inset, 0 0 0 1px #000000;
   z-index: 1;
   -webkit-transition: all 0.25s ease 0s;
   -moz-transition: all 0.25s ease 0s;
@@ -21,7 +21,7 @@
 .color-picker .color-cue {
   margin-top: -0.25em;
   border-radius: .2em;
-  box-shadow: 0 0 0 1px rgba(51, 54, 57, 0.65);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.65);
 }
 .color-picker ul {
   padding: .5em;
@@ -44,7 +44,7 @@
   margin: -0.25em;
   z-index: 3;
   border-radius: .25em;
-  box-shadow: 0 0 0 1px rgba(51, 54, 57, 0.35) inset;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15000000000000002) inset, 0 0 0 1px #000000;
 }
 .color-picker li.previewer {
   float: right;
@@ -63,7 +63,7 @@
 }
 .color-picker li [type=radio]:checked + .color-box {
   z-index: 2;
-  box-shadow: 0 0 0 1px rgba(51, 54, 57, 0.35) inset, 0 0 0 0.25em #ffffff, 0 0 0.75em 0 rgba(0, 0, 0, 0.9935);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35) inset, 0 0 0 0.25em #ffffff, 0 0 0.75em 0 rgba(0, 0, 0, 0.65);
 }
 .color-picker li span {
   display: none;
@@ -74,8 +74,26 @@
   position: relative;
   background: #333639;
   border: 2px solid #dadcde;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35);
   border-radius: .5em;
   z-index: 2;
+}
+.color-picker .color-chips .color-box:after {
+  content: attr(data-title);
+  position: absolute;
+  top: 65%;
+  left: 65%;
+  font-size: .85em;
+  white-space: nowrap;
+  line-height: 1;
+  border-radius: .3em;
+  display: none;
+  background: rgba(0, 0, 0, 0.65);
+  padding: .2em .5em;
+  color: #FFF;
+}
+.color-picker .color-chips .color-box:hover:after {
+  display: block;
 }
 .color-picker:hover .color-chips {
   display: block;
@@ -83,9 +101,10 @@
 .color-picker .divider {
   border-top: 1px solid #000000;
   border-bottom: 1px solid #575c61;
-  padding: 4px;
+  padding: .5em;
   background: #1b1d1e;
   border-radius: 0 0 .3em .3em;
+  font-weight: 300;
 }
 .color-picker .divider .color-cue-name {
   padding: 0 .5em 0 0;
@@ -105,9 +124,14 @@
   text-shadow: 0 0 1px rgba(0, 0, 0, 0.65);
   box-shadow: none;
   border-radius: 0;
+  outline: none;
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
   -ms-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
+}
+.color-picker input.picker-preview:focus,
+.color-picker input.picker-preview:active {
+  box-shadow: 0 0 0 1px #69C, 0 0 .5em 0 #69C;
 }
