@@ -1,0 +1,110 @@
+.color-picker {
+  float: left;
+  font-size: 13px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+.color-picker .color-box {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  width: 2em;
+  height: 2em;
+  box-shadow: 0 0 0 1px rgba(51, 54, 57, 0.65);
+  z-index: 1;
+  -webkit-transition: all 0.25s ease 0s;
+  -moz-transition: all 0.25s ease 0s;
+  -ms-transition: all 0.25s ease 0s;
+  -o-transition: all 0.25s ease 0s;
+  transition: all 0.25s ease 0s;
+}
+.color-picker .color-cue {
+  margin-top: -0.25em;
+  box-shadow: 0 0 0 1px rgba(51, 54, 57, 0.65);
+}
+.color-picker ul {
+  padding: .5em;
+  margin: 0;
+  list-style: none;
+}
+.color-picker ul:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.color-picker li {
+  float: left;
+  position: relative;
+  padding: 0;
+}
+.color-picker li:hover .color-box {
+  width: 2.5em;
+  height: 2.5em;
+  margin: -0.25em;
+  z-index: 3;
+  border-radius: .25em;
+  box-shadow: 0 0 0 1px rgba(51, 54, 57, 0.35) inset;
+}
+.color-picker li.previewer {
+  float: right;
+}
+.color-picker li.highlight .color-box {
+  border-color: #FFFFFF;
+  box-shadow: 0 0 7px #99CCFF;
+}
+.color-picker li:nth-child(7n+1) {
+  clear: left;
+}
+.color-picker li [type=radio] {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.color-picker li [type=radio]:checked + .color-box {
+  z-index: 2;
+  box-shadow: 0 0 0 1px rgba(51, 54, 57, 0.35) inset, 0 0 0 0.25em #ffffff, 0 0 0.75em 0 rgba(0, 0, 0, 0.9935);
+}
+.color-picker li span {
+  display: none;
+}
+.color-picker .color-chips {
+  float: left;
+  display: none;
+  position: relative;
+  background: #333639;
+  border: 2px solid #dadcde;
+  border-radius: .5em;
+}
+.color-picker:hover .color-chips {
+  display: block;
+}
+.color-picker .divider {
+  border-top: 1px solid #000000;
+  border-bottom: 1px solid #575c61;
+  padding: 3px;
+  background: #1b1d1e;
+  border-radius: 0 0 .3em .3em;
+}
+.color-picker .divider .color-cue-name {
+  padding: .5em .5em 0 0;
+  color: rgba(255, 255, 255, 0.65);
+}
+.color-picker .divider-heading {
+  text-transform: uppercase;
+  font-size: .8em;
+  color: #969699;
+}
+.color-picker input.picker-preview {
+  padding: .35em .5em;
+  margin: .2em;
+  width: 7em;
+  border: 0;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.65);
+  border-radius: .3em;
+  font-weight: 300;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -ms-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}

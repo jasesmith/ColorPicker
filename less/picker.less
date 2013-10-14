@@ -1,0 +1,124 @@
+@import "_variables.less";
+@import "_mixins.less";
+
+.color-picker {
+	float:left;
+	font-size:13px;
+	font-family:Helvetica, Arial, sans-serif;
+	
+	.color-box {
+		position:relative;
+		cursor:pointer;
+		display:inline-block;
+		vertical-align:middle;
+		width:2em;
+		height:2em;
+		box-shadow:0 0 0 1px fadeout(@base, 35%);
+		z-index:1;
+		.transition(all, .25s);
+	}
+	
+	.color-cue {
+		margin-top:-.25em;
+		//box-shadow:0 0 0 1px fadeout(@base, 65%) inset, 0 0 0 .25em #FFF, 0 0 .75em 0 fadeout(#000,.65);
+		box-shadow:0 0 0 1px fadeout(@base, 35%);
+	}
+	
+	ul {
+		padding:.5em;
+		margin:0;
+		list-style:none;
+		
+		&:after {
+			content:'';
+			display:block;
+			clear:both;
+		}
+	}
+	
+	li {
+		float:left;
+		position:relative;
+		padding:0;
+		
+		&:hover .color-box {
+			width:2.5em;
+			height:2.5em;
+			margin:-.25em;
+			z-index:3;
+			border-radius:.25em;
+			box-shadow:0 0 0 1px fadeout(@base, 65%) inset;
+		}
+		
+		&.previewer {
+			float:right;
+		}
+		
+		&.highlight .color-box {
+			border-color:#FFFFFF;
+			box-shadow:0 0 7px #99CCFF;
+		}
+		
+		&:nth-child(7n+1) {
+			clear:left;
+		}
+		
+		[type=radio] {
+			position:absolute;
+			//visibility:hidden;
+			top:0;
+			left:0;
+			
+			&:checked + .color-box {
+				z-index:2;
+				box-shadow:0 0 0 1px fadeout(@base, 65%) inset, 0 0 0 .25em #FFF, 0 0 .75em 0 fadeout(#000,.65);
+			}
+		}
+		span {
+			display:none;
+		}
+	}
+	
+	.color-chips {
+		float:left;
+		display:none;
+		position:relative;
+		background:@base;
+		border:2px solid lighten(@base, 65%);
+		border-radius:.5em;
+	}
+	
+	&:hover .color-chips {
+		display:block;
+	}
+	
+	.divider {
+		border-top:1px solid darken(@base, 25%);
+		border-bottom:1px solid lighten(@base, 15%);
+		padding:3px;
+		background:darken(@base, 10%);
+		border-radius:0 0 .3em .3em;
+		
+		.color-cue-name {
+			padding:.5em .5em 0 0;
+			color:fadeout(#FFF, 35%);
+		}
+	}
+	
+	.divider-heading {
+		text-transform:uppercase;
+		font-size:.8em;
+		color:#969699;
+	}
+	
+	input.picker-preview {
+		padding:.35em .5em;
+		margin:.2em;
+		width:7em;
+		border:0;
+		text-shadow:0 0 1px rgba(0,0,0,.65);
+		border-radius:.3em;
+		font-weight:300;
+		.transition(all, .3s);
+	}
+}
