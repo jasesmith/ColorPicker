@@ -1,7 +1,6 @@
 .color-picker {
   float: left;
   position: relative;
-  font-size: 13px;
   font-family: Helvetica, Arial, sans-serif;
 }
 .color-picker .color-box {
@@ -10,19 +9,52 @@
   display: inline-block;
   vertical-align: middle;
   width: 2em;
-  height: 2em;
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15000000000000002) inset, 0 0 0 1px #000000;
+  height: 1.5em;
+  box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.15000000000000002) inset, 0 0 0 1px rgba(0, 0, 0, 0.35);
   z-index: 1;
-  -webkit-transition: all 0.25s ease 0s;
-  -moz-transition: all 0.25s ease 0s;
-  -ms-transition: all 0.25s ease 0s;
-  -o-transition: all 0.25s ease 0s;
-  transition: all 0.25s ease 0s;
+  -webkit-transition: all 0.15s ease 0s;
+  -moz-transition: all 0.15s ease 0s;
+  -ms-transition: all 0.15s ease 0s;
+  -o-transition: all 0.15s ease 0s;
+  transition: all 0.15s ease 0s;
 }
-.color-picker .color-cue {
-  margin-top: -0.25em;
-  border-radius: .2em;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.65);
+.color-picker .color-button-group {
+  display: inline-block;
+  position: relative;
+  border-radius: .3em;
+  padding: .25em .5em;
+  cursor: pointer;
+  border: 1px solid #6d8fb1;
+  background: #FFF;
+}
+.color-picker .color-button-group .color-cue {
+  border-radius: .25em;
+  display: block;
+  margin: 0;
+  background-color: #000;
+  position: absolute;
+  left: 1px;
+  top: 1px;
+  bottom: 1px;
+  height: auto;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15000000000000002) inset;
+}
+.color-picker .color-button-group .color-cue.invalid-color {
+  background: rgba(255, 0, 0, 0.15000000000000002) !important;
+}
+.color-picker .color-button-group .color-cue-name {
+  display: inline-block;
+  margin-left: 2em;
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.65);
+  font-family: Monaco, monospace;
+}
+.color-picker .color-button-group .color-picker-input {
+  padding: 0;
+  color: #999;
+  margin: 0 0 0 .5em;
+}
+.color-picker .color-button-group .color-picker-input:focus {
+  box-shadow: none;
 }
 .color-picker ul {
   padding: .5em;
@@ -40,12 +72,17 @@
   padding: 0;
 }
 .color-picker li:hover .color-box {
-  width: 2.5em;
-  height: 2.5em;
-  margin: -0.25em;
+  width: 2.2em;
+  height: 1.7em;
+  margin: -0.1em;
   z-index: 3;
   border-radius: .25em;
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15000000000000002) inset, 0 0 0 1px #000000;
+}
+.color-picker li.light,
+.color-picker li.medium,
+.color-picker li.dark {
+  display: none;
 }
 .color-picker li.previewer {
   float: right;
@@ -59,11 +96,13 @@
 }
 .color-picker li [type=radio] {
   position: absolute;
+  visibility: hidden;
   top: 0;
   left: 0;
 }
 .color-picker li [type=radio]:checked + .color-box {
   z-index: 2;
+  border-radius: .25em;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35) inset, 0 0 0 0.25em #ffffff, 0 0 0.75em 0 rgba(0, 0, 0, 0.65);
 }
 .color-picker li span {
@@ -96,14 +135,14 @@
   line-height: 1;
   border-radius: .3em;
   display: none;
-  background: rgba(0, 0, 0, 0.65);
+  background-color: rgba(0, 0, 0, 0.65);
   padding: .2em .5em;
   color: #FFF;
 }
 .color-picker .color-chips .color-box:hover:after {
   display: block;
 }
-.color-picker .toggle-picker {
+.color-picker .toggle {
   position: absolute;
   visibility: hidden;
   top: 0;
@@ -112,6 +151,38 @@
 .color-picker .toggle-picker:checked ~ .color-chips {
   display: block;
   opacity: 1;
+}
+.color-picker .toggle-picker:checked ~ .color-button-group {
+  box-shadow: 0 0 0 1px #69C, 0 0 .35em 0 #69C;
+}
+.color-picker .handle {
+  display: inline-block;
+  padding: .15em .85em;
+  margin: .5em 0 0 .5em;
+  border-radius: 1em;
+  border: 0;
+  color: #FFF;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.65);
+  box-shadow: none;
+  outline: none;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -ms-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+.color-picker .toggle:checked + .handle {
+  box-shadow: 0 0 0 1px #69C, 0 0 .5em 0 #69C;
+  background: rgba(102, 153, 204, 0.35);
+}
+.color-picker .toggle-light:checked ~ ul .light {
+  display: block;
+}
+.color-picker .toggle-medium:checked ~ ul .medium {
+  display: block;
+}
+.color-picker .toggle-dark:checked ~ ul .dark {
+  display: block;
 }
 .color-picker .close-picker {
   position: absolute;
@@ -132,7 +203,7 @@
   border-top: 1px solid #000000;
   border-bottom: 1px solid #575c61;
   padding: .5em;
-  background: #1b1d1e;
+  background: #1b1d1e url(striped.png) repeat 50% 50%;
   border-radius: 0 0 .3em .3em;
   font-weight: 300;
 }
@@ -146,12 +217,14 @@
   font-size: .8em;
   color: #969699;
 }
-.color-picker input.picker-preview {
+.color-picker .color-picker-input {
   padding: .35em .5em;
   margin: .2em;
   width: 7em;
   border: 0;
-  text-shadow: 0 0 1px rgba(0, 0, 0, 0.65);
+  border-radius: .3em;
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.65);
+  font-family: Monaco, monospace;
   box-shadow: none;
   outline: none;
   -webkit-transition: all 0.3s ease 0s;
@@ -160,7 +233,7 @@
   -o-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
 }
-.color-picker input.picker-preview:focus,
-.color-picker input.picker-preview:active {
+.color-picker .color-picker-input:focus,
+.color-picker .color-picker-input:active {
   box-shadow: 0 0 0 1px #69C, 0 0 .5em 0 #69C;
 }
